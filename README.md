@@ -6,13 +6,15 @@ It has not yet been submitted to the Gnome Shell extension directory and might n
 
 Being an absolute beginner when it comes to programming for Gnome the extension's code has been heavily influenced by [this](http://smasue.github.io/gnome-shell-tw) and [this](http://www.mibus.org/2013/02/15/making-gnome-shell-plugins-save-their-config/) blogpost. Kudos to the authors! :)
 
+![Screenshot](assets/todoist-gnome-shell-extension.png?raw=true "Screenshot")
+
 # Setup
 
 Clone the repository to `~./local/share/gnome-shell/extensions/` into a folder named `todoist@ubuntudroid.gmail.com` using the following command:
 
     git clone git@github.com:ubuntudroid/todoist-gnome-shell-extension.git todoist@ubuntudroid.gmail.com
     
-The name of the directory is important because your Gnome Shell won't recognize the extension otherwise.
+The name of the directory is important because Gnome Shell won't recognize the extension otherwise.
 
 Then restart Gnome Shell (ALT-F2 and then 'r') and navigate to https://extensions.gnome.org/local/. You can enable the extension and specify your Todoist API token there.
 
