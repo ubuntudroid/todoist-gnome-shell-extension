@@ -1,0 +1,9 @@
+<schemalist gettext-domain="todoist">
+	<schema id="org.gnome.shell.extensions.todoist" path="/org/gnome/shell/extensions/todoist/">
+		<key name="api-token" type="s">
+			<default>'token'</default>
+			<summary>Todoist API token</summary>
+			<description>Personal Todoist API token as found at the bottom of the integrations settings page</description>
+		</key>
+	</schema>
+</schemalist>
