@@ -8,6 +8,8 @@ const PanelMenu = imports.ui.panelMenu;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
+const Polyfill = Me.imports.polyfill;
+const Utils = Me.imports.utils;
 
 const URL = 'https://todoist.com/API/v7/sync';
 
@@ -57,7 +59,7 @@ const TodoistIndicator = new Lang.Class({
 			);
 		},
 
-                _isDoneOrDeletedOrArchived: function (item) {
+		_isDoneOrDeletedOrArchived: function (item) {
 			return item.checked === 1 || item.is_deleted === 1 || item.is_archived;
 		},
 
@@ -70,25 +72,39 @@ const TodoistIndicator = new Lang.Class({
 		},
 
 		_removeIfInList: function (item) {
-			let index = _openItems.indexOf(item);
+			let index = _openItems.findIndex(openItem => openItem.id === item.id);
 			if (index > -1)
 				_openItems.splice(index, 1);
 		},
 
 		_addIfNotInList: function (item) {
-			let index = _openItems.indexOf(item);
+			let index = _openItems.findIndex(openItem => openItem.id === item.id);
 			if (index === -1)
 				_openItems.splice(_openItems.length, 0, item);
 		},
 
-		_refreshUI: function (data) {
+		_getTextForTaskCount: function (count) {
+			switch (count) {
+				case 0: return "no due tasks";
+				case 1: return "one due task";
+				default: return count + " due tasks";
+			}
+		},
+
+		_parseJson: function (data) {
 			_syncToken = data.sync_token;
-			let undoneItems = data.items.filter(this._isNotDone).map(this._extractId);
-			let doneItems = data.items.filter(this._isDoneOrDeletedOrArchived).map(this._extractId);
+
+			let undoneItems = data.items.filter(this._isNotDone);
+			let doneItems = data.items.filter(this._isDoneOrDeletedOrArchived);
 			undoneItems.forEach(this._addIfNotInList);
 			doneItems.forEach(this._removeIfInList);
-			let count = _openItems.length;
-			this.buttonText.set_text(count + " open tasks");
+		},
+
+		_refreshUI: function (data) {
+			this._parseJson(data);
+			
+			let count = _openItems.filter(Utils.isDueDateInPast).length;
+			this.buttonText.set_text(this._getTextForTaskCount(count));
 		},
 
 		_removeTimeout: function () {
