@@ -45,10 +45,10 @@ const TodoistIndicator = new Lang.Class({
 			let params = {
 				token: token,
 				sync_token: _syncToken,
-				resource_types: '["items"]'
-		    	}
+				resource_types: '["items"]'	
+			}
 			_httpSession = new Soup.Session();
-			let message = Soup.form_request_new_from_hash('GET', URL, params);
+			let message = Soup.form_request_new_from_hash('POST', URL, params);
 			_httpSession.queue_message(message, Lang.bind(this, function (_httpSession, message) {
 						if (message.status_code !== 200)
 							return;
