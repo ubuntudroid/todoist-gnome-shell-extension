@@ -77,10 +77,12 @@ const TodoistIndicator = new Lang.Class({
 				_openItems.splice(index, 1);
 		},
 
-		_addIfNotInList: function (item) {
+		_addOrUpdate: function (item) {
 			let index = _openItems.findIndex(openItem => openItem.id === item.id);
 			if (index === -1)
 				_openItems.splice(_openItems.length, 0, item);
+			else
+				_openItems[index] = item
 		},
 
 		_getTextForTaskCount: function (count) {
@@ -96,7 +98,7 @@ const TodoistIndicator = new Lang.Class({
 
 			let undoneItems = data.items.filter(this._isNotDone);
 			let doneItems = data.items.filter(this._isDoneOrDeletedOrArchived);
-			undoneItems.forEach(this._addIfNotInList);
+			undoneItems.forEach(this._addOrUpdate);
 			doneItems.forEach(this._removeIfInList);
 		},
 
