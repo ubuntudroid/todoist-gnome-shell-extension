@@ -6,6 +6,7 @@ const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const PanelMenu = imports.ui.panelMenu;
 const ExtensionUtils = imports.misc.extensionUtils;
+const Util = imports.misc.util;
 const Me = ExtensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
 const Polyfill = Me.imports.polyfill;
@@ -30,6 +31,7 @@ const TodoistIndicator = new Lang.Class({
 				y_align: Clutter.ActorAlign.CENTER
 			});
 			this.actor.add_actor(this.buttonText);
+			this.actor.connect('button-press-event', _openWebpage);
 			this._refresh();
 		},
 
@@ -129,6 +131,10 @@ const TodoistIndicator = new Lang.Class({
 		}
 	}
 );
+
+function _openWebpage() {
+	Util.spawn(['xdg-open', 'https://todoist.com/app#agenda%2Foverdue%2C%20today'])
+}
 
 let todoistMenu;
 
