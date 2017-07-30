@@ -10,9 +10,9 @@ Being an absolute beginner when it comes to programming for Gnome the extension'
 
 # Setup
 
-Clone the repository to `~./local/share/gnome-shell/extensions/` into a folder named `todoist@ubuntudroid.gmail.com` using the following command:
+Clone the repository to `~/.local/share/gnome-shell/extensions/` into a folder named `todoist@ubuntudroid.gmail.com` using the following command:
 
-    git clone git@github.com:ubuntudroid/todoist-gnome-shell-extension.git todoist@ubuntudroid.gmail.com
+    git clone https://github.com/ubuntudroid/todoist-gnome-shell-extension.git todoist@ubuntudroid.gmail.com
     
 The name of the directory is important because Gnome Shell won't recognize the extension otherwise.
 
