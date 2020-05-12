@@ -12,7 +12,7 @@ const Convenience = Me.imports.convenience;
 const Polyfill = Me.imports.polyfill;
 const Utils = Me.imports.utils;
 
-const URL = 'https://todoist.com/API/v7/sync';
+const URL = 'https://todoist.com/API/v8/sync';
 
 
 let _httpSession;
@@ -47,7 +47,7 @@ const TodoistIndicator = new Lang.Class({
 			let params = {
 				token: token,
 				sync_token: _syncToken,
-				resource_types: '["items"]'	
+				resource_types: '["items"]'
 			}
 			_httpSession = new Soup.Session();
 			let message = Soup.form_request_new_from_hash('POST', URL, params);
@@ -62,7 +62,7 @@ const TodoistIndicator = new Lang.Class({
 		},
 
 		_isDoneOrDeletedOrArchived: function (item) {
-			return item.checked === 1 || item.is_deleted === 1 || item.is_archived;
+			return item.checked === 1 || item.is_deleted === 1 || item.in_history === 1;
 		},
 
 		_isNotDone: function (item) {
@@ -106,7 +106,7 @@ const TodoistIndicator = new Lang.Class({
 
 		_refreshUI: function (data) {
 			this._parseJson(data);
-			
+
 			let count = _openItems.filter(Utils.isDueDateInPast).length;
 			this.buttonText.set_text(this._getTextForTaskCount(count));
 		},
