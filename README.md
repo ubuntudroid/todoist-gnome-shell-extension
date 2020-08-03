@@ -1,3 +1,5 @@
+**Unmaintained: Please check out our [todoist-indicator] which started as a fork of this project and greatly expand on its feature set.**
+
 # Unofficial Todoist Gnome Shell extension
 
 This is an unofficial Gnome Shell extension which displays the number of currently open tasks in the top right corner of your Gnome Shell.
