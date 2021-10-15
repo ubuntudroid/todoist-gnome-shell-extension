@@ -1,4 +1,4 @@
-**Unmaintained: Please check out our [todoist-indicator] which started as a fork of this project and greatly expand on its feature set.**
+**Unmaintained: Please check out [todoist-indicator](https://github.com/tarelda/todoist-indicator) which started as a fork of this project and greatly expand on its feature set.**
 
 # Unofficial Todoist Gnome Shell extension
 
